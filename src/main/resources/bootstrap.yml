@@ -1,4 +1,8 @@
-spring:
-  cloud:
-    config:
-      uri: http://localhost:8888
+#spring:
+#  spring:
+#    application:
+#      name: ms-eureka
+#  cloud:
+#    config:
+#      profile: prod
+#      uri: http://localhost:8888

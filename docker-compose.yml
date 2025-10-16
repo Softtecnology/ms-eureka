@@ -1,6 +1,6 @@
 services:
   ms-eureka:
     image: ms-eureka
-    container_name: ms-eureka-container
+    container_name: ms-eureka
     ports:
       - "8761:8761" 

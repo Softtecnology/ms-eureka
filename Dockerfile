@@ -1,30 +1,15 @@
-# ---- Fase 1: Construcción (Build) ----
-# Usamos una imagen de Maven para compilar el proyecto Java
-FROM maven:3.8.5-openjdk-17 AS build
+# Usa una imagen base con Java, como Eclipse Temurin de Adoptium
+FROM eclipse-temurin:17-jre-focal
 
-# Establecemos el directorio de trabajo dentro del contenedor
-WORKDIR /ms-eureka
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-# Copiamos el archivo pom.xml para descargar dependencias
-COPY pom.xml .
-RUN mvn dependency:go-offline
+# Copia el archivo JAR de tu proyecto (el que se encuentra en la carpeta 'target') al contenedor
+# Asegúrate de que el nombre del archivo JAR sea el correcto
+COPY target/ms-eureka-0.0.1-SNAPSHOT.jar ms-eureka.jar
 
-# Copiamos el resto del código fuente y construimos el .jar
-COPY src ./src
-RUN mvn package -DskipTests
-
-# ---- Fase 2: Ejecución (Runtime) ----
-# Usamos una imagen ligera con solo el entorno de ejecución de Java
-FROM eclipse-temurin:17-jre-noble
-
-# Establecemos el directorio de trabajo
-WORKDIR /ms-eureka
-
-# Copiamos el .jar construido desde la fase anterior
-COPY --from=build /ms-eureka/target/*.jar ms-eureka.jar
-
-# Exponemos el puerto en el que corre la aplicación Spring
+# Expone el puerto que usa tu aplicación Spring Boot (por defecto es el 8080)
 EXPOSE 8761
 
-# Comando para ejecutar la aplicación cuando el contenedor inicie
-ENTRYPOINT ["java", "-jar", "ms-eureka.jar"]
+# Define el comando que se ejecutará al iniciar el contenedor
+ENTRYPOINT ["java","-jar","/app/ms-eureka.jar"]
