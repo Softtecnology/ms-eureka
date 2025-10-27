@@ -1,8 +1,8 @@
-#spring:
-#  spring:
-#    application:
-#      name: ms-eureka
-#  cloud:
-#    config:
-#      profile: prod
-#      uri: http://localhost:8888
+spring:
+  application:
+    name: ms-eureka
+  cloud:
+    config:
+      profile: prod
+      uri: http://ms-configsrv:8888 # esta configuracion es para docker
+#     uri: http://localhost:8888    # esta configuracion es para desarrollo local
