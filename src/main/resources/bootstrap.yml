@@ -4,5 +4,5 @@ spring:
   cloud:
     config:
       profile: prod
-      uri: http://ms-configsrv:8888 # esta configuracion es para docker
-#     uri: http://localhost:8888    # esta configuracion es para desarrollo local
+      uri: http://127.0.0.1:8888    # esta configuracion es para desarrollo local
+#      uri: http://ms-configsrv:8888 # esta configuracion es para docker
